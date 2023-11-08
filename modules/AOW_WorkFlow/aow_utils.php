@@ -869,6 +869,21 @@ function getRoundRobinUser($users, $id)
     return $users[0];
 }
 
+function checkUserStatus($user) {
+    global $app_list_strings;
+    $userStatusInactive = $app_list_strings['user_status_dom']['Inactive'];
+
+    return $user->status === $userStatusInactive;
+}
+
+function checkUserEmployeeStatus($user) {
+    global $app_list_strings;
+    $employeeTerminatedStatus = $app_list_strings['employee_status_dom']['Terminated'];
+    $employeeAbsenceStatus = $app_list_strings['employee_status_dom']['Leave of Absence'];
+
+    return $user->employee_status === $employeeTerminatedStatus || $user->employee_status === $employeeAbsenceStatus;
+}
+
 function setLastUser($user_id, $id)
 {
     $_SESSION['lastuser'][$id] = $user_id;
